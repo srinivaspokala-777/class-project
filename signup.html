@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="container1">
+        <form id="idform" class="content">
+            <table>
+                 <tr>
+                    <td colspan="2" align="center">
+                        <p> Sign Up Here </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td> User Name </td>
+                    <td> <input type="text" name="un" id="idun" placeholder="enter name" required /> </td>
+                </tr>
+                <tr>
+                    <td> Email ID </td>
+                    <td> <input type="email" name="em" id="idem" placeholder="enter email" required /> </td>
+                </tr>
+                <tr>
+                    <td> Password </td>
+                    <td> <input type="password" name="pw" id="idpw" placeholder="enter password" required /> </td>
+                </tr>
+                <tr>
+                    <td> Confirm Password </td>
+                    <td> <input type="password" name="cpw" id="idcpw" placeholder="confirm password" required /> </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="Sign Up" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("idform").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const fd = new FormData(event.target);
+            if(fd.get("pw") !== fd.get("cpw")) {
+                alert("Passwords do not match!");
+            }
+            else {
+                const userData = {
+                    username: fd.get("un"),
+                    email: fd.get("em"),
+                    password: fd.get("pw")
+                };
+                if(localStorage.getItem("users")) {
+                    const users = JSON.parse(localStorage.getItem("users"));
+                    users.push(userData);
+                    localStorage.setItem("users", JSON.stringify(users));
+                } else {
+                    localStorage.setItem("users", JSON.stringify([userData]));
+                }
+                alert("Sign Up Successful!");
+                window.location.href = "index.html";
+            }
+        })
+    </script>
+
+</body>
+</html>

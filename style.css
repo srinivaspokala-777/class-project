@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Parkinsans:wght@300..800&family=Sixtyfour&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Parkinsans:wght@300..800&family=Sixtyfour&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container1 {
+    background-image: url("pa.jpg.jpg");
+    height: 100vh;
+    background-size: 100vw 100vh;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.container2 {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #6b7ee7 0%, #120b13d1 100%);
+    padding: 40px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.auth {
+    margin: 20px;
+    gap: 20px;
+    display: flex;
+}
+
+.pages, .pages2 {
+    background-image: none;
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 100vh;
+    height: auto;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+}
+.content{
+    background-color: aliceblue;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px gold;
+    width: 50%;
+    padding: 20px;
+    text-align: center;
+}
+
+.card1{
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px gold;
+    width: 250px;
+    height: 500px;
+    margin: 15px;
+    padding: 20px;
+    text-align: center;
+}
+
+h5 {
+    font-family: "Parkinsans", sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    font-style: normal;
+    color: rgb(74, 64, 161);
+}
+
+.content h1{
+    font-family: "Parkinsans", sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    font-style: normal;
+    color: rgb(101, 87, 191);
+}
+
+p{
+    margin: 20px 0px;
+    font-family: "Parkinsans", sans-serif;
+    font-size: 16px;
+    font-weight: 100;
+    font-style: normal;
+    color: rgb(181, 205, 160);   
+}
+
+.content button{
+    margin: 20px 0px;
+    display: flex;
+    align-items: center;
+}
+
+.delivery{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.active {
+    position: relative;
+    animation: loading 5s linear forwards;
+}
+
+table td{
+    padding: 15px;
+}
+
+table td p{
+    font-family: "Parkinsans", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-shadow: 0px 0px 5px gray;
+    color: rgb(120, 119, 119);
+}
+
+table td input{
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    text-align: center;
+}
+
+table {
+    margin: auto;
+}
+
+@keyframes loading{
+    from{
+        left: 0px
+    }
+    to{
+        left: calc(100% - 80px)
+    }
+}
+
+@media(max-width: 500px){
+    .content{
+        width: 100%;
+    }
+}

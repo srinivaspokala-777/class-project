@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+
+    <script src="script.js" defer></script>
+    <script src="list.js" defer></script>
+    <script src="fetch.js" defer></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+
+        function addcart(item) {
+            alert("Adding to cart: " + item.title);
+            cart.push(item);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            alert("Item added to cart! - " + cart.length + " items in cart.");
+            document.querySelector('.loading-text').innerText = cart.length;
+        }
+        function cartPage() {
+            window.location.href = 'cart.html';
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+
+            if(localStorage.getItem("cart")) {
+                cart = JSON.parse(localStorage.getItem("cart"));
+                document.querySelector('.loading-text').innerText = cart.length;
+            }
+            else {
+                cart = [];
+                document.querySelector('.loading-text').innerText = 0;
+            }
+                const container = document.querySelector('.pages');    
+            electronics.map((item) => {
+                const card = document.createElement('div');
+                card.classList.add('card1');
+                card.innerHTML = `
+                <img src="${item.image}" alt="${item.title}" width=200 height=200 />
+                <h5>${item.title}</h5>
+                <p>Price: $${item.price}</p>
+                <p>Rating: ${item.rating}</p>
+                <button class="btn btn-outline-warning" onclick='addcart(${JSON.stringify(item)})'>Add to Cart</button>
+                `;
+                container.appendChild(card);
+            });
+
+            const container2 = document.querySelector('.pages2');
+            let products = [];
+
+            fetch("https://fakestoreapi.com/products")
+            .then(response => response.json())     // convert JSON string → JS object
+            .then(data => {
+                products = data;                   // store all products here
+                console.log("Products loaded:", products);
+                products.map((item) => {
+                    const card = document.createElement('div');
+                    card.classList.add('card1');
+                    const newProduct = {
+                        title: item.title,
+                        price: item.price,
+                        image: item.image
+                    };
+                    card.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" width=200 height=200 />
+                    <h5>${item.title.substring(0, 20)}...</h5>
+                    <p>Price: $${item.price}</p>
+                    <p>Rating: ${item.rating.rate}</p>
+                    <button class="btn btn-outline-warning" onclick='addcart(${JSON.stringify(newProduct
+                        
+                    )})'>Add to Cart</button>
+                    `;
+                    container2.appendChild(card);
+                });
+            })
+            .catch(error => console.error("Error fetching products:", error));
+
+            const user = document.querySelector('.user');
+            const cu = JSON.parse(localStorage.getItem("cu"));
+            if(cu) {
+                user.innerHTML = `
+                Electronics Products to Purchase - Welcome ${cu.username} 
+                <button class="btn btn-outline-danger" onclick="localStorage.removeItem('cu'); localStorage.removeItem('cart'); window.location.href = 'index.html';">Sign Out</button>
+                `;
+            }
+        });
+    </script>
+
+</head>
+<body>
+    <div class="container2">
+        <div class="delivery"  style="justify-content: center;" onclick = "window.location.href='cart.html'">
+            <span class="loading-text"> 0% </span>
+            <svg 0nclick="cartPage()" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#75FBFD"><path d="m480-574-42-42 74-74H330v-60h182l-74-74 42-42 146 146-146 146ZM289.79-80Q260-80 239-101.21t-21-51Q218-182 239.21-203t51-21Q320-224 341-202.79t21 51Q362-122 340.79-101t-51 21Zm404 0Q664-80 643-101.21t-21-51Q622-182 643.21-203t51-21Q724-224 745-202.79t21 51Q766-122 744.79-101t-51 21ZM62-820v-60h116l170 364h287.71L796-796h67L701-493q-11 19-28.56 30.5T634-451H331l-56 104h491v60H284q-37.66 0-57.33-30T224-378l64-118-148-324H62Z"/></svg>
+        </div>
+        <span class="user"> Electronics Products to Purchase </span>
+        
+        <br><br>
+        <div class="pages">
+
+        </div>
+        <br><br>
+        <h5> Products from 3rd Party Website to Purchase </h5>
+        <br><br>
+        <div class="pages2">
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cart pages</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+     <div class="container1">
+        <form id="idform" class="content">
+            <table border="1">
+                 <tr>
+                    <td colspan="2" align="center">
+                        <p> Product details billing page </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input  type="submit" value="pay now" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>product</th>
+                    <th>price</th>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        document.getElementById("idform").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Payment Successful! Thank you for your purchase.");
+            localStorage.removeItem("cart");
+            window.location.href = 'products.html';
+        });
+       const table= document.getElementsByTagName('table')[0]
+       cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+       let total = 0;
+       cartList.forEach(item => {
+            const row = document.createElement('tr');
+            priceCell.textContent = `<td>${item.price}</td>
+            <td>${item.title}</td>`;
+            table.appendChild(row);
+            total=total+item.price;
+       });
+         const totalRow = document.createElement('tr');
+            totalRow.innerHTML = `<th>Total</th><th>$${total.toFixed(2)}</th>
+            <td><strong> ${total}</td>`;
+                table.appendChild(totalRow);
+                document.getElementById("idform").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Payment Successful! Thank you for your purchase.");
+            localStorage.removeItem("cart");
+            window.location.href = 'products.html';
+        });
+    </script>
+</body>
+</html>
